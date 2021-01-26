@@ -1,0 +1,37 @@
+
+
+
+
+.dashboard {
+ background-image: url("orchard.jpg");
+ background-color: #cccccc;
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-size: cover;
+}
+
+.shopall {
+ background-image: url("fruit_homepage.jpg");
+ background-color: #cccccc;
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-size: cover;
+}
+
+.container1 {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
