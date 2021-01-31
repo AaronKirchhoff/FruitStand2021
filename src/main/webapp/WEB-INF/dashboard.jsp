@@ -18,7 +18,7 @@
 
 </head>
 <meta charset="ISO-8859-1">
-<title>Fruit Dashboard</title>
+<title>My Fruit Dashboard</title>
 </head>
 <body class="dashboard">
 	<h2 class=" jumbotron mx-auto border border-success mt-4 display-3 text-center" style="width: 1200px" >Welcome to the Fruit Stand, ${ user.firstName }</h2>
