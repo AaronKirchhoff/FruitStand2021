@@ -1,8 +1,7 @@
 package com.aaronkirchhoff.FruitStand.models;
 
 import java.util.Date;
-
-
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -60,6 +61,14 @@ public class Fruit {
 		this.createdAt = new Date();
 	}
     
+    // many to many field, 3/11/21
+    @ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="likes",
+			joinColumns = @JoinColumn(name= "fruit_id"),
+			inverseJoinColumns = @JoinColumn(name= "user_id")
+			)
+    private List<User> likers;
     
     @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="author")
@@ -90,6 +99,16 @@ public class Fruit {
 
 
 
+
+
+	public List<User> getLikers() {
+		return likers;
+	}
+
+
+	public void setLikers(List<User> likers) {
+		this.likers = likers;
+	}
 
 
 	public String getImage_url() {

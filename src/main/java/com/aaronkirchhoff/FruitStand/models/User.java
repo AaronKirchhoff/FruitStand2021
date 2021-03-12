@@ -15,6 +15,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -59,7 +62,28 @@ public class User {
 //	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 //	private List<Picture> pics;
 	
+// many to many field, made on 3/11/21 let hope this works
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="likes",
+			joinColumns = @JoinColumn(name= "user_id"),
+			inverseJoinColumns = @JoinColumn(name= "fruit_id")
+			)
+	private List<Fruit> likedFruit;
+	
 	public User() {
+	}
+
+
+
+	public List<Fruit> getLikedFruit() {
+		return likedFruit;
+	}
+
+
+
+	public void setLikedFruit(List<Fruit> likedFruit) {
+		this.likedFruit = likedFruit;
 	}
 
 

@@ -1,5 +1,8 @@
 package com.aaronkirchhoff.FruitStand.services;
 
+import java.util.List;
+
+
 import org.mindrot.jbcrypt.BCrypt;
 
 
@@ -45,6 +48,10 @@ public class UserService {
 		
 		public User getSingleUser(Long id) {
 			return this.uRepo.findById(id).orElse(null);
+		}
+		
+		public List<User> getAllUsers() {
+			return this.uRepo.findAll();			
 		}
 		
 //		public User updateUser(Long id) {

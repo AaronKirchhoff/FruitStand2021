@@ -21,17 +21,31 @@
 <title>My Fruit Dashboard</title>
 </head>
 <body class="dashboard">
-	<h2 class=" jumbotron mx-auto border border-success mt-4 display-3 text-center" style="width: 1200px" >Welcome to the Fruit Stand, ${ user.firstName }</h2>
+	<h2 class=" jumbotron mx-auto border border-success mt-4 display-3 text-center" style="width: 1200px" >Welcome to the Fruit Stand, ${ user.firstName } ${ user.lastName }</h2>
 	<div class="container">
 		
 		
 		<a href="/fruitstand/addnew" class="btn btn-success btn-lg">Add a new fruit</a>
 		<a href="/fruitstand/shopall" class="btn btn-warning btn-lg d-inline float-right">search all fruit</a>
 		
-		
-		
-		
 	</div>
+	
+	<h1 class="mx-auto text-center text-primary">Here are your favortie fruit</h1>
+	
+	<table class="table table-striped table-dark table-hover">
+			<thead>
+				<tr>
+					<th>Fruit I like</th>			
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach items="${ user.likedfruit }" var="mylikedfruit">
+				<tr>
+					<td>${ mylikedfruit.name }</td>											
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
 		
 		
 		
