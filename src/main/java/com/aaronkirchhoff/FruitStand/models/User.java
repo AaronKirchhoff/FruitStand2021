@@ -67,7 +67,7 @@ public class User {
 	@JoinTable(
 			name="likes",
 			joinColumns = @JoinColumn(name= "user_id"),
-			inverseJoinColumns = @JoinColumn(name= "fruit_id")
+			inverseJoinColumns = @JoinColumn(name= "fruits_id")
 			)
 	private List<Fruit> likedFruit;
 	

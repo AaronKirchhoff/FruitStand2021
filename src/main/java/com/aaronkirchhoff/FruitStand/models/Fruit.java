@@ -1,6 +1,7 @@
 package com.aaronkirchhoff.FruitStand.models;
 
 import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -61,11 +62,11 @@ public class Fruit {
 		this.createdAt = new Date();
 	}
     
-    // many to many field, 3/11/21
+    // many to many field, 3/11/21 ok lets add some new text?
     @ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 			name="likes",
-			joinColumns = @JoinColumn(name= "fruit_id"),
+			joinColumns = @JoinColumn(name= "fruits_id"),
 			inverseJoinColumns = @JoinColumn(name= "user_id")
 			)
     private List<User> likers;
