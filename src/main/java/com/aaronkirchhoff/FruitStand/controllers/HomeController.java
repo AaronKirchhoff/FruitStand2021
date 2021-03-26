@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,16 @@ public class HomeController {
 		model.addAttribute("ideas", this.fService.getFruits());
 		model.addAttribute("user", this.uService.getSingleUser(userId));
 		return "dashboard.jsp";
+	}
+	
+//	add a liker 3/26/21
+	@GetMapping("/like/{fruitId}")
+	public String like(@PathVariable("fruitId") Long fruitId, HttpSession session) {
+		Long userId = (long)session.getAttribute("user_id");
+		Fruit fruitToLike= this.fService.findFruit(fruitId);
+		User userWhoLikedFruit = this.uService.getSingleUser(userId);
+		this.fService.addLiker(fruitToLike, userWhoLikedFruit);
+		return "redirect:/fruitstand";
 	}
 	
 //	to get to the create page

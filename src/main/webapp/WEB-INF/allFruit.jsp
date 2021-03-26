@@ -31,6 +31,8 @@
 					<th>Color</th>
 					<th>Size</th>
 					<th>Domestic or Import</th>
+					<th>number of likes</th>
+					<th>Action</th>
 					
 				</tr>
 			</thead>
@@ -41,6 +43,9 @@
 					<td>${ myfruit.color }</td>
 					<td>${ myfruit.size }</td>
 					<td>${ myfruit.domesticOrImport }</td>
+					<td><c:out value="${myfruit.likers.size()}"/></td>
+					<td><a href="/like/${myfruit.id}">Like!</a></td>
+					
 											
 				</tr>
 			</c:forEach>

@@ -39,7 +39,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${ user.likedfruit }" var="mylikedfruit">
+			<c:forEach items="${ user.likedFruit }" var="mylikedfruit">
 				<tr>
 					<td>${ mylikedfruit.name }</td>											
 				</tr>
