@@ -10,6 +10,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aaronkirchhoff.FruitStand.models.Fruit;
 import com.aaronkirchhoff.FruitStand.models.User;
 import com.aaronkirchhoff.FruitStand.repositories.UserRepository;
 
@@ -59,9 +60,12 @@ public class UserService {
 //
 //		}
 		
+		
 		public User updateUser(Long id, User updateLanguage) {
 	        return this.uRepo.save(updateLanguage);
 
 		}
+		
+		
 }
 

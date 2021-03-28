@@ -75,6 +75,25 @@ public class Fruit {
 	@JoinColumn(name="author")
 	private User author;
     
+
+
+	//    fruit that are a part of a user's shopping cart
+//    @ManyToOne(fetch=FetchType.LAZY)
+//   	@JoinColumn(name="shopper")
+//   	private User shopper;
+    
+    
+//    many to many realtionahip for shopping cart, 3/28
+    @ManyToMany(fetch=FetchType.LAZY)
+   	@JoinTable(
+   			name="cart",
+   			joinColumns = @JoinColumn(name= "thisfruit_id"),
+   			inverseJoinColumns = @JoinColumn(name= "thisuser_id")
+   			)
+       private List<User> shopper;
+    
+    
+    
 //    old constructor with no fields
 	public Fruit() {
 	}
@@ -100,6 +119,15 @@ public class Fruit {
 
 
 
+
+	public List<User> getShopper() {
+		return shopper;
+	}
+
+
+	public void setShopper(List<User> shopper) {
+		this.shopper = shopper;
+	}
 
 
 	public List<User> getLikers() {

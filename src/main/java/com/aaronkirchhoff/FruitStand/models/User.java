@@ -59,10 +59,22 @@ public class User {
 	@OneToMany(mappedBy="author", fetch=FetchType.LAZY)
 	private List<Fruit> fruitPosted;
 	
-//	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-//	private List<Picture> pics;
+//	3/27/21 user creates a shopping cart of fruit
+//	@OneToMany(mappedBy="shopper", fetch=FetchType.LAZY)
+//	private List<Fruit> cart;
 	
-// many to many field, made on 3/11/21 let hope this works
+//	many to many, thrid entity created here, 3/28
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="cart",
+			joinColumns = @JoinColumn(name= "thisuser_id"),
+			inverseJoinColumns = @JoinColumn(name= "thisfruit_id")
+			)
+	private List<Fruit> shoppingCart;
+
+
+
+	// many to many field, made on 3/11/21 let hope this works
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 			name="likes",
@@ -74,6 +86,29 @@ public class User {
 	public User() {
 	}
 
+	
+
+	public List<Fruit> getShoppingCart() {
+		return shoppingCart;
+	}
+
+
+
+	public void setShoppingCart(List<Fruit> shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+
+
+
+	public List<Fruit> getFruitPosted() {
+		return fruitPosted;
+	}
+
+
+
+	public void setFruitPosted(List<Fruit> fruitPosted) {
+		this.fruitPosted = fruitPosted;
+	}
 
 
 	public List<Fruit> getLikedFruit() {

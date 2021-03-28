@@ -20,7 +20,29 @@
 <meta charset="ISO-8859-1">
 <title>Shopping cart</title>
 </head>
-<body>
+<body class="container col-3">
+<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>My Cart</th>
+					<th>Remove Item</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach items="${ user.shoppingCart }" var="myFruitCart">
+				<tr>
+					<td>${ myFruitCart.name }</td>	
+					<td> <a href="/removefromcart/${myFruitCart.id }">Delete</a></td>					
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		
+		<a href="/fruitstand" class="btn btn-success">Back to Dasboard</a>
+		<a href="/fruitstand/shopall" class="btn btn-warning d-inline float-right">Keep Shopping</a>
+		
+		
+		
 
 
 

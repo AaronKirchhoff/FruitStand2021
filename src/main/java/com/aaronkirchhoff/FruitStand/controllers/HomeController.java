@@ -44,15 +44,48 @@ public class HomeController {
 		return "dashboard.jsp";
 	}
 	
-//	add a liker 3/26/21
+//	add a liker 3/26/21 thank you JSTl!
 	@GetMapping("/like/{fruitId}")
 	public String like(@PathVariable("fruitId") Long fruitId, HttpSession session) {
-		Long userId = (long)session.getAttribute("user_id");
+		Long userId = (Long)session.getAttribute("user_id");
 		Fruit fruitToLike= this.fService.findFruit(fruitId);
 		User userWhoLikedFruit = this.uService.getSingleUser(userId);
 		this.fService.addLiker(fruitToLike, userWhoLikedFruit);
 		return "redirect:/fruitstand";
 	}
+	
+	
+//	remove a liker 3/27/21 thank you JSTl!
+	@GetMapping("/unlike/{fruitId}")
+	public String unlike(@PathVariable("fruitId") Long fruitId, HttpSession session) {
+		Long userId = (Long)session.getAttribute("user_id");
+		Fruit fruitToUnLike= this.fService.findFruit(fruitId);
+		User userWhoUnLikedFruit = this.uService.getSingleUser(userId);
+		this.fService.removeLiker(fruitToUnLike, userWhoUnLikedFruit);
+		return "redirect:/fruitstand";
+	}
+	
+//	add to cart button
+	@GetMapping("/addtocart/{fruitId}")
+	public String addToCart(@PathVariable("fruitId") Long fruitId, HttpSession session) {
+		Long userId = (Long)session.getAttribute("user_id");
+		Fruit fruitToAdd= this.fService.findFruit(fruitId);
+		User userWhoAddedFruit = this.uService.getSingleUser(userId);
+		this.fService.addToCart(fruitToAdd, userWhoAddedFruit);
+		return "redirect:/fruitstand/shopall";
+	}
+	
+	
+//	remove fruit from shopping cart
+	@GetMapping("/removefromcart/{fruitId}")
+	public String removeFromCart(@PathVariable("fruitId") Long fruitId, HttpSession session) {
+		Long userId = (Long)session.getAttribute("user_id");
+		Fruit fruitToAdd= this.fService.findFruit(fruitId);
+		User userWhoAddedFruit = this.uService.getSingleUser(userId);
+		this.fService.removeFromCart(fruitToAdd, userWhoAddedFruit);
+		return "redirect:/fruitstand/mycart";
+	}
+	
 	
 //	to get to the create page
 	@RequestMapping("/fruitstand/addnew")
@@ -77,14 +110,22 @@ public class HomeController {
 		return "redirect:/fruitstand";
 	}
 	
+//	added model attribute for user, set userId variable name to grab the insession user and added http session in the funtion to know to carry this session info with the function. then the name "user" is whats carried over to the allFruit page so it can read this function.
 	@RequestMapping("/fruitstand/shopall")
-	public String allFruit(@ModelAttribute("allfruit") Fruit okFruit, Model model) {
+	public String allFruit(@ModelAttribute("allfruit") Fruit okFruit, Model model, HttpSession session) {
+		Long userId = (Long)session.getAttribute("user_id");
 		model.addAttribute("fruit", this.fService.getFruits());
+		model.addAttribute("user", this.uService.getSingleUser(userId));
 		return "allFruit.jsp";	
 	}
 	
-
-	
+	@RequestMapping("/fruitstand/mycart")
+	public String mycart(@ModelAttribute("allfruit") Fruit okFruit, Model model, HttpSession session) {
+		Long userId = (Long)session.getAttribute("user_id");
+		model.addAttribute("fruit", this.fService.getFruits());
+		model.addAttribute("user", this.uService.getSingleUser(userId));
+		return "myCart.jsp";	
+	}
 
 	
 //	link to get the This specific fruit

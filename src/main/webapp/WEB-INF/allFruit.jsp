@@ -23,7 +23,9 @@
 <body class="shopall">
 
 	<div class="container">
-		<h2 class="text-center mx-auto display-1 bg-secondary rounded-bottom">The Fruit Stand Online!!</h2>
+		<h2 class="text-center mx-auto display-1 bg-secondary rounded-bottom m-0">The Fruit Stand Online!!</h2>
+		<h2 class="bg-light pb-1 pr-1 m-0 text-right">My Cart |  <span class="badge badge-secondary"><c:out value="${user.shoppingCart.size()}"/></span></h2>
+		
 		<table class="table table-striped table-dark table-hover">
 			<thead>
 				<tr>
@@ -31,8 +33,9 @@
 					<th>Color</th>
 					<th>Size</th>
 					<th>Domestic or Import</th>
-					<th>number of likes</th>
+					<th>Add to Cart</th>
 					<th>Action</th>
+					<th>Number of likes</th>
 					
 				</tr>
 			</thead>
@@ -43,8 +46,18 @@
 					<td>${ myfruit.color }</td>
 					<td>${ myfruit.size }</td>
 					<td>${ myfruit.domesticOrImport }</td>
+					<td> <a class="text-success" href="/addtocart/${myfruit.id }">+Cart</a></td>
+					<td><c:choose>
+						<c:when test="${myfruit.likers.contains(user)}">
+							<a class="text-danger" href="/unlike/${myfruit.id}">Unlike</a>
+						</c:when>
+						<c:otherwise>
+						<a class="text-warning" href="/like/${myfruit.id}">Like!</a>
+						</c:otherwise>
+						</c:choose>
+					</td>
 					<td><c:out value="${myfruit.likers.size()}"/></td>
-					<td><a href="/like/${myfruit.id}">Like!</a></td>
+					
 					
 											
 				</tr>
@@ -52,6 +65,7 @@
 			</tbody>
 		</table>
 		<a href="/fruitstand" class="btn btn-success">Back to Dasboard</a>
+		<a href="/fruitstand/mycart" class="btn btn-primary">My Shopping Cart</a>
 		<a href="/logout" type="button" class="btn btn-info d-inline float-right">Logout</a>
 	
 		
