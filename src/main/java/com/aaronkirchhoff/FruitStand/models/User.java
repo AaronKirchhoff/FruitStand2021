@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,11 +20,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 
@@ -53,15 +57,27 @@ public class User {
 	private String confirmPassword;
 	
 	@Column(updatable=false)
+	@DateTimeFormat(pattern = "yyy-MM-DD HH:mm:ss")
     private Date createdAt;
+	@DateTimeFormat(pattern = "yyy-MM-DD HH:mm:ss")
     private Date updatedAt;
+    
+    @PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+	
+	@PreUpdate
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 	
 	@OneToMany(mappedBy="author", fetch=FetchType.LAZY)
 	private List<Fruit> fruitPosted;
 	
-//	3/27/21 user creates a shopping cart of fruit
-//	@OneToMany(mappedBy="shopper", fetch=FetchType.LAZY)
-//	private List<Fruit> cart;
+//	pictures! 4/1/21
+	@OneToMany(mappedBy ="owner", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Picture> pics;
 	
 //	many to many, thrid entity created here, 3/28
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -83,10 +99,20 @@ public class User {
 			)
 	private List<Fruit> likedFruit;
 	
+
 	public User() {
+
+}
+
+	public List<Picture> getPics() {
+		return pics;
 	}
 
-	
+
+
+	public void setPics(List<Picture> pics) {
+		this.pics = pics;
+	}
 
 	public List<Fruit> getShoppingCart() {
 		return shoppingCart;

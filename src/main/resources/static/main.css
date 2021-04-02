@@ -3,7 +3,7 @@
 
 
 .dashboard {
- background-image: url("orchard.jpg");
+ background-image: url("/pictures/orchard.jpg");
  background-color: #cccccc;
  background-repeat: no-repeat;
  background-attachment: fixed;
@@ -11,7 +11,7 @@
 }
 
 .shopall {
- background-image: url("fruit_homepage.jpg");
+ background-image: url("/pictures/fruit_homepage.jpg");
  background-color: #cccccc;
  background-repeat: no-repeat;
  background-attachment: fixed;
