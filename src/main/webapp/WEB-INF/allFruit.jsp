@@ -68,13 +68,18 @@
 		<a href="/fruitstand/mycart" class="btn btn-primary">My Shopping Cart</a>
 		<a href="/logout" type="button" class="btn btn-info d-inline float-right">Logout</a>
 	
-		<h3>Upload form</h3>
-		<form class="bg-secondary" method="POST" action="somthing" enctype="multipart/form-data">
+		<h3>Upload picture form</h3>
+		<form class="bg-secondary" method="POST" action="/allFruit/upload" enctype="multipart/form-data">
 		<div class="form-data">Select File:<input type="file" name="image"></div>
 		<div class="form-data"><textarea name="description" placeholder="please enter something"/></textarea></div>
 		<button class="btn btn-primary">upload pic!</button>
 		
 		</form>
+		
+		<c:forEach items="${ user.pics }" var="pic">
+		<img src="${ pic.image_url }" height="150" width="200">
+		<p>${pic.description}</p>
+		</c:forEach>
 		
 	</div>
 
